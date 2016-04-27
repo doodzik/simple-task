@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+cat -n $T_DIR$T_FILE | awk '{$1=$1;print}'

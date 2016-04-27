@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# $1 == Int task to be marked done
+# $1 task to be added
+TASK=$T_DIR$T_FILE
+touch $TASK
+re='^[0-9]+$'
+if [[ $1 =~ $re ]] ; then
+ T_LAST_DONE=$(sed $1"q;d" $TASK)
+ sed -i '' "${1}d" $TASK
+ t
+elif [[ "$1" ]]; then
+ echo $@ >> $TASK
+ t
+else
+  echo $T_FILE | sed -e 's/\..*$//'
+  cat -n $TASK
+fi
