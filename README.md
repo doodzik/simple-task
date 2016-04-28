@@ -19,10 +19,9 @@ $ brew instal bash-completion
 autoload bashcompinit
 bashcompinit
 
-EDITOR=vim # if you haven't set your editor set it
-T_EXT=.txt
-T_FILE="todo${T_EXT}" # default todo list
-T_DIR=~/Library/Mobile Documents/com~apple~CloudDocs # path where the todos are saved to
+export T_EXT=.txt
+export T_FILE="todo${T_EXT}" # default todo list
+export T_DIR=~/Library/Mobile Documents/com~apple~CloudDocs # path where the todos are saved to
 
 complete -F _simple_task_complete simple_task
 complete -F _simple_task_list_complete simple_task_list
@@ -54,12 +53,13 @@ hello world
 ## How to work with multiple task_lists
 
 ```bash
-# change to a different task list if it isn’t present it creates a new one, prints content of the task list, you can use tab completion to access your task lists
+# change to a different task list if it isn’t present it creates a new one, 
+# prints content of the task list, you can use tab completion to access your task lists
 $ tl tasks
 tasks
 # rename a task
 $ tl tasks mv new_task_list
-# edit task list file in editor
+# edit task list file in editor # opens in $EDITOR
 $ tl new_task_list o
 # delete task list
 $ tl new_task_list d
