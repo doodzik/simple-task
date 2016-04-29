@@ -19,8 +19,6 @@ $ brew instal bash-completion
 autoload bashcompinit
 bashcompinit
 
-export T_EXT=.txt # default .txt, optional
-export T_DEFAULT="todo" # default todo list, optional
 export T_DIR=~/Library/Mobile Documents/com~apple~CloudDocs # path where the todos are saved to
 
 complete -F simple_task_complete simple_task
@@ -28,6 +26,10 @@ complete -F simple_task_list_complete simple_task_list
 
 alias t=simple_task
 alias tl=simple_task_list
+
+# these are optional
+export T_EXT=.txt # default .txt
+export T_DEFAULT="todo" # default todo list
 ```
 
 # Usage
