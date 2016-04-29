@@ -2,16 +2,27 @@
 
 # $1 == Int task to be marked done
 # $1 task to be added
+
+if [[ -z $T_EXT ]] ; then
+  T_EXT=".txt"
+fi
+
+if [[ -z $T_DEFAULT ]] ; then
+  T_DEFAULT="todo"
+fi
+
+T_FILE=$T_DEFAULT$T_EXT
 TASK=$T_DIR$T_FILE
 touch $TASK
+
 re='^[0-9]+$'
 if [[ $1 =~ $re ]] ; then
  T_LAST_DONE=$(sed $1"q;d" $TASK)
  sed -i '' "${1}d" $TASK
- t
+ simple_task
 elif [[ "$1" ]]; then
  echo $@ >> $TASK
- t
+ simple_task
 else
   echo $T_FILE | sed -e 's/\..*$//'
   cat -n $TASK

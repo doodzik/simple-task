@@ -2,13 +2,18 @@
 
 # $1 task_list
 # $2 command
+
+if [[ -z $T_EXT ]] ; then
+  T_EXT=".txt"
+fi
+
 if [[ $1 ]] ; then
   LIST_FILE=$1$T_EXT
   LIST=$T_DIR$LIST_FILE
   touch $LIST
   if [[ $2 == "d" ]] ; then
     rm $LIST
-    tl
+    simple_task_list
   elif [[ $2 == "o" ]] ; then
     $EDITOR $LIST
   elif [[ $2 == "mv" ]] ; then
@@ -20,7 +25,7 @@ if [[ $1 ]] ; then
     fi
   else
     T_FILE=$LIST_FILE
-    t
+    simple_task
   fi
 else
   ls -1 $T_DIR | sed -e 's/\..*$//'
