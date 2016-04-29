@@ -21,8 +21,8 @@ bashcompinit
 
 export T_DIR=~/Library/Mobile Documents/com~apple~CloudDocs # path where the todos are saved to
 
-complete -F simple_task_complete simple_task
-complete -F simple_task_list_complete simple_task_list
+complete -F _simple_task_complete simple_task
+complete -F _simple_task_list_complete simple_task_list
 
 alias t=simple_task
 alias tl=simple_task_list
