@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-ls $T_DIR | sed -e 's/\..*$//'

@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# $1 == Int task to be marked done
+# $1 task to be added
+
+function simple_task_note {
+  if [[ -z "$T_DEFAULT" ]] ; then
+    T_DEFAULT="todo"
+  fi
+
+  T_EXT=".md"
+  T_FILE="$T_DEFAULT$T_EXT"
+  TASK="$T_DIR$T_FILE"
+  touch "$TASK"
+
+  re='^[0-9]+$'
+  if [[ $1 =~ $re ]] ; then
+    _ts_getSectionByHeaderId "$1" "$TASK"
+    if [[ $_ST_END_LINE -eq 0 || $_ST_START_LINE -eq 0 ]] ; then
+      echo "no such task: $1"
+    else
+      NEW_TEXT=$(sed -n "${_ST_START_LINE},${_ST_END_LINE}p" "$TASK" | vipe)
+      _ts_insert_after "$TASK" "$_ST_END_LINE" "$NEW_TEXT"
+      sed -i '' "${_ST_START_LINE},${_ST_END_LINE}d" "$TASK"
+    fi
+    unset $_ST_START_LINE
+    unset $_ST_END_LINE
+    simple_task
+  else
+    echo "specify the notes you want to see of a task with te task id"
+  fi
+}

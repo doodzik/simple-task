@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+. _simple_task_util
+. _simple_task
+. _simple_task_list
+. _simple_task_note
+. __simple_task_complete
+. __simple_task_list_complete
+
+if hash complete 2>/dev/null; then
+  complete -F _simple_task_complete simple_task
+  complete -F _simple_task_complete simple_task_note
+  complete -F _simple_task_list_complete simple_task_list
+fi

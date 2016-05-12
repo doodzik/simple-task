@@ -14,22 +14,23 @@ $ brew instal bash-completion
 
 ### configuration
 ```bash
-# add this to your bashrc/zshrc
-# add this if you use zsh
+# .bashrc/.zshrc
+
+# add this if you use zsh and want autocomplete
 autoload bashcompinit
 bashcompinit
 
-export T_DIR=~/Library/Mobile Documents/com~apple~CloudDocs # path where the todos are saved to
+# path where the todos are saved to
+export T_DIR=~/Library/Mobile Documents/com~apple~CloudDocs 
 
-complete -F _simple_task_complete simple_task
-complete -F _simple_task_list_complete simple_task_list
+. simple_task_init
 
 alias t=simple_task
 alias tl=simple_task_list
+alias tn=simple_task_note
 
-# these are optional
-export T_EXT=.txt # default .txt
-export T_DEFAULT="todo" # default todo list
+# this is optional and defaults to todo
+export T_DEFAULT="todo"
 ```
 
 # Usage
@@ -47,9 +48,6 @@ todo
 # remove/check a task by index, returns todo list, you can use tab-completion to get your tasks
 $ t 1
 todo
-# access last removed tast
-$ echo $T_LAST_DONE
-hello world
 ```
 
 ## How to work with multiple task_lists
@@ -65,4 +63,11 @@ $ tl tasks mv new_task_list
 $ tl new_task_list o
 # delete task list
 $ tl new_task_list d
+```
+
+## How notes work
+
+```bash
+# see and edit an note in a editor specified in $EDITOR
+$ tn 1
 ```

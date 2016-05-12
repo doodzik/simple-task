@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+function _ts_getSectionByHeaderId {
+  _ST_START_LINE=0
+  _ST_END_LINE=0
+
+  local HASH_LINE=$1
+  local FILE=$2
+  local HASH_INDEX=0
+  local START_LINE=0
+  local END_LINE=0
+
+  while read LINE; do
+    END_LINE=$[$END_LINE +1]
+    echo "$LINE" | grep -q "^#"
+    if [ $? -eq 0 ] ; then
+      HASH_INDEX=$[$HASH_INDEX +1]
+      if [ $HASH_LINE -eq $HASH_INDEX ] ; then
+        START_LINE=$END_LINE
+      elif [ $HASH_INDEX -gt $HASH_LINE ] ; then
+        break
+      fi
+    fi
+  done < "$FILE"
+
+  if [ $HASH_INDEX -eq $HASH_LINE ] ; then
+    END_LINE=$[$END_LINE + 1]
+  fi
+
+  _ST_START_LINE=$START_LINE
+  _ST_END_LINE=$[$END_LINE - 1]
+}
+
+function _ts_insert_after {
+   local file="$1" line=$2 new_text="$3" new_line=$'\n'
+   new_text_escaped=$(printf '%s\n' "$new_text$new_line" | sed 's,[\/&],\\&,g;s/$/\\/')
+   new_text_escaped=${new_text_escaped%?}
+   sed -i '' "${line}a\\
+     ${new_text_escaped}" "$file"
+}

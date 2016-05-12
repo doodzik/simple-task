@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+function _simple_task_complete {
+  if [[ -z "$T_DEFAULT" ]] ; then
+    T_DEFAULT="todo"
+  fi
+
+  T_EXT=".md"
+  T_FILE="$T_DEFAULT$T_EXT"
+
+  cat -n "$T_DIR$T_FILE" | awk '{$1=$1;print}'
+}

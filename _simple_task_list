@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# $1 task_list
+# $2 command
+
+function simple_task_list {
+  if [[ $1 ]] ; then
+    T_EXT=".md"
+    LIST_FILE="$1$T_EXT"
+    LIST="$T_DIR$LIST_FILE"
+    touch "$LIST"
+    if [[ "$2" == "d" ]] ; then
+      rm "$LIST"
+      simple_task_list
+    elif [[ "$2" == "o" ]] ; then
+      $EDITOR $LIST
+    elif [[ $2 == "mv" ]] ; then
+      if [[ $3 ]] ; then
+        LIST_NEW="$T_DIR$3$T_EXT"
+        mv "$LIST" "$LIST_NEW"
+      else
+        echo "tl $1 mv [new name]"
+      fi
+    else
+      export T_DEFAULT=$1
+      simple_task
+    fi
+  else
+    ls -1 "$T_DIR" | sed -e 's/\..*$//'
+  fi
+}
