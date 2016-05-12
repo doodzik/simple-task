@@ -11,7 +11,6 @@ $ brew instal simple_task
 $ brew instal bash-completion
 ```
 
-
 ### configuration
 ```bash
 # .bashrc/.zshrc
@@ -28,9 +27,6 @@ export T_DIR=~/Library/Mobile Documents/com~apple~CloudDocs
 alias t=simple_task
 alias tl=simple_task_list
 alias tn=simple_task_note
-
-# this is optional and defaults to todo
-export T_DEFAULT="todo"
 ```
 
 # Usage
@@ -62,7 +58,7 @@ $ tl tasks mv new_task_list
 # edit task list file in editor # opens in $EDITOR
 $ tl new_task_list o
 # delete task list
-$ tl new_task_list d
+$ tl new_task_list rm
 ```
 
 ## How notes work

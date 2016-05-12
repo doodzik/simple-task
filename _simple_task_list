@@ -9,8 +9,9 @@ function simple_task_list {
     LIST_FILE="$1$T_EXT"
     LIST="$T_DIR$LIST_FILE"
     touch "$LIST"
-    if [[ "$2" == "d" ]] ; then
+    if [[ "$2" == "rm" ]] ; then
       rm "$LIST"
+      T_DEFAULT='todo'
       simple_task_list
     elif [[ "$2" == "o" ]] ; then
       $EDITOR $LIST
