@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 function _simple_task_list_complete {
-  ls "$T_DIR" | sed -e 's/\..*$//'
+  ls "$T_DIR" | grep "*.md" | sed -e 's/\..*$//'
 }

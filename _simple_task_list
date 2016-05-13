@@ -27,6 +27,6 @@ function simple_task_list {
       simple_task
     fi
   else
-    ls -1 "$T_DIR" | sed -e 's/\..*$//'
+    ls -1 "$T_DIR" | grep "*$T_EXT" | sed -e 's/\..*$//'
   fi
 }
